@@ -1,4 +1,4 @@
-#include <LiquidCrystal.h>
+// #include <LiquidCrystal.h>
 
 //  Variables
 int pulsePin = 0;                 // Pulse Sensor purple wire connected to analog pin 0
@@ -6,7 +6,7 @@ int blinkPin = 13;                // pin to blink led at each beat
 int fadePin = 8;                  // pin to do fancy classy fading blink at each beat
 int fadeRate = 0;                 // used to fade LED on with PWM on fadePin
 
-LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+//LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
 // Volatile Variables, used in the interrupt service routine!
 volatile int BPM;                   // int that holds raw Analog in 0. updated every 2mS
@@ -94,9 +94,9 @@ void serialOutputWhenBeatHappens()
      Serial.print("*** Heart-Beat Happened *** ");  //ASCII Art Madness
      Serial.print("BPM: ");
      Serial.println(BPM);
-     lcd.clear();
-     lcd.print("BPM: ");
-     lcd.print(BPM);
+//     Serial.clear();
+     Serial.print("BPM: ");
+     Serial.print(BPM);
    }
  else
    {
@@ -121,36 +121,36 @@ void arduinoSerialMonitorVisual(char symbol, int data )
     case 1:   
       Serial.println("---");
       break;
-    case 2:    
-      Serial.println("------");
-      break;
-    case 3:    
-      Serial.println("---------");
-      break;
-    case 4:   
-      Serial.println("------------");
-      break;
-    case 5:   
-      Serial.println("--------------|-");
-      break;
-    case 6:   
-      Serial.println("--------------|---");
-      break;
-    case 7:   
-      Serial.println("--------------|-------");
-      break;
-    case 8:  
-      Serial.println("--------------|----------");
-      break;
-    case 9:    
-      Serial.println("--------------|----------------");
-      break;
-    case 10:   
-      Serial.println("--------------|-------------------");
-      break;
-    case 11:   
-      Serial.println("--------------|-----------------------");
-      break;
+//    case 2:    
+//      Serial.println("------");
+//      break;
+//    case 3:    
+//      Serial.println("---------");
+//      break;
+//    case 4:   
+//      Serial.println("------------");
+//      break;
+//    case 5:   
+//      Serial.println("--------------|-");
+//      break;
+//    case 6:   
+//      Serial.println("--------------|---");
+//      break;
+//    case 7:   
+//      Serial.println("--------------|-------");
+//      break;
+//    case 8:  
+//      Serial.println("--------------|----------");
+//      break;
+//    case 9:    
+//      Serial.println("--------------|----------------");
+//      break;
+//    case 10:   
+//      Serial.println("--------------|-------------------");
+//      break;
+//    case 11:   
+//      Serial.println("--------------|-----------------------");
+//      break;
   } 
 }
 
