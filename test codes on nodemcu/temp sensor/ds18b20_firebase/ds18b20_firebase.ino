@@ -16,8 +16,8 @@
 
 #define FIREBASE_HOST "https://fourth-year-eb7e4.firebaseio.com/"                          // the project name address from firebase id
 #define FIREBASE_AUTH "WJPA1uBKgwbizPgcIIBe3Qj6GdXFFDNkPttHdaxq"            // the secret key generated from firebase
-#define WIFI_SSID "JTL Faiba"                                             // input your home or public wifi name 
-#define WIFI_PASSWORD "Ndetto@321"                                    //password of wifi ssid
+#define WIFI_SSID "Incubator"                                             // input your home or public wifi name 
+#define WIFI_PASSWORD "Incubator#2013"                                    //password of wifi ssid
 
 
 // Data wire is plugged into digital pin 2 on the Nodemcu

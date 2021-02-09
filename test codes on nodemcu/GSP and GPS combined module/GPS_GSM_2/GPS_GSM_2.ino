@@ -1,24 +1,26 @@
-#include <ESP8266WiFi.h>         
 #include <TinyGPS.h>
 #include <SoftwareSerial.h>
-SoftwareSerial Gsm(7, 8);
+
+SoftwareSerial Gsm(13,15);
 char phone_no[] = "0757674142"; //replace with phone no. to get sms
 
 TinyGPS gps;  //Creates a new instance of the TinyGPS object
 
 void setup()
 {
+
   Serial.begin(9600);
   Gsm.begin(9600);
-  //Serial.println("1");
+  Serial.println("1");
+                                          //print local IP address
 }
+
 
 void loop()
 {
-  //Serial.println("2");
+  Serial.println("2");
   bool newData = false;
-  unsigned long chars;
-  unsigned short sentences, failed;
+  unsigned long chars; signed short sentences, failed;
 
   // For one second we parse GPS data and report some key values
   for (unsigned long start = millis(); millis() - start < 1000;)
@@ -34,7 +36,7 @@ void loop()
 
   if (newData)      //If newData is true
   {
-    //Serial.println("3");
+    Serial.println("3");
     float flat, flon;
     unsigned long age;
     gps.f_get_position(&flat, &flon, &age);
@@ -43,13 +45,11 @@ void loop()
     Gsm.print("AT+CMGS=\"");
     Gsm.print(phone_no);
     Gsm.println("\"");
-   Gsm.println("Hey This is ess, I think I'm danger");
-
 
     delay(300);
     Gsm.print("http://maps.google.com/maps?q=loc:" );
 
-    //Serial.println("5");
+//    Serial.println("5");
 
     // Gsm.print("Latitude = ");
     Gsm.print(flat == TinyGPS::GPS_INVALID_F_ANGLE ? 0.0 : flat, 6);
@@ -57,7 +57,6 @@ void loop()
     Serial.print(",");
     Gsm.print(flon == TinyGPS::GPS_INVALID_F_ANGLE ? 0.0 : flon, 6);
     delay(200);
-  // Gsm.println("Hey This is ess, I think I'm danger");
 
     Gsm.println((char)26); // End AT command with a ^Z, ASCII code 26
     delay(200);
