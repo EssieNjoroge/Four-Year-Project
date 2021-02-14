@@ -1,9 +1,9 @@
-#include <Firebase.h>
+//#include <Firebase.h>
 #include <FirebaseArduino.h>
-#include <FirebaseCloudMessaging.h>
-#include <FirebaseError.h>
-#include <FirebaseHttpClient.h>
-#include <FirebaseObject.h>
+//#include <FirebaseCloudMessaging.h>
+//#include <FirebaseError.h>
+//#include <FirebaseHttpClient.h>
+//#include <FirebaseObject.h>
 
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
@@ -12,13 +12,13 @@
 #include <TinyGPS.h>
 #include <OneWire.h>
 #include <DallasTemperature.h>
-//#include <SoftwareSerial.h>
+#include <SoftwareSerial.h>
 
 HTTPClient http;
 
-#define WIFI_SSID "JTL Faiba"
-#define WIFI_PASSWORD "Ndetto@321"
-#define FIREBASE_HOST "https://fourth-year-eb7e4.firebaseio.com/"
+#define WIFI_SSID "strathmore" //change
+#define WIFI_PASSWORD "5trathm0re" //change
+#define FIREBASE_HOST "fourth-year-eb7e4.firebaseio.com"
 #define FIREBASE_AUTH "WJPA1uBKgwbizPgcIIBe3Qj6GdXFFDNkPttHdaxq"
 
 //Define variables
@@ -97,7 +97,7 @@ void SendSensorData() {
   //Post Data the moisture name
   postData = "GPS=" +  gpsDataUrl + "&temp=" + temperature_data + "&BPM=" + BPM_data;
   //ipaddress and the path to the php fil you created
-  http.begin("http://192.168.1.11/bulk_sms/index.php");              //change the ip to your computer ip address
+  http.begin("http://10.51.35.224/bulk_sms/index.php");              //change the ip to your computer ip address
   http.addHeader("Content-Type", "application/x-www-form-urlencoded");    //Specify content-type header
 
   int httpStatusCode = http.POST(postData);   //Send the request
@@ -112,16 +112,17 @@ void SendSensorData() {
 
   delay(1000);  //Post Data at every 1 seconds
 
-  Firebase.setFloat("pulserate", BPM_value);
+ /* Firebase.pushString("pulserate", BPM_data);
   if (Firebase.failed()) {
     Serial.print("sending pulserate failed:");
     Serial.println(Firebase.error());
     return;
-  }
+  }*/
   Firebase.setInt("Temperature", temp_value);
   if (Firebase.failed()) {
-    Serial.print("sending Temperature failed:");
+    //Serial.print("sending Temperature failed:");
     Serial.println(Firebase.error());
+    Serial.print("sending Temperature to firebase failed: 12345");
     return;
   }
 
@@ -148,8 +149,9 @@ String getGPS() {
   //Gsm.print(" Longitude = ");
   Serial.print(",");
   flon = TinyGPS::GPS_INVALID_F_ANGLE ? 0.0 : flon, 6;
-
   delay(1000);
+  flat = -1.3067631;
+  flon = 36.8168564;
 
 
   String mapUrl = String("http://maps.google.com/maps?q=loc:") + flat + "," + flon;
